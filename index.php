@@ -22,7 +22,7 @@
     <div id="wrapper">
       <div id="login" class="animated bounceInDown form">
         <section class="login_content">
-          <form method="" action="dashboard/index.php">
+          <form method="" action="dashboard/">
             <h1>Login Form</h1>
             <div>
             <strong>Username</strong>

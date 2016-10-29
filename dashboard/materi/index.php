@@ -1,13 +1,4 @@
-<link href="../../content/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../content/css/font-awesome.min.css" rel="stylesheet">
-<link href="../../content/css/animate.min.css" rel="stylesheet">
-<!-- Custom styling plus plugins -->
-<link href="../../content/css/custom.css" rel="stylesheet">
-<link href="../../content/css/site.css" rel="stylesheet">
-
-<script src="../../content/js/jquery.min.js"></script>
-<script src="../../content/js/nprogress.js"></script>
-<?php include "../../header.php";?>     
+<?php include "../header.php";?>     
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -87,8 +78,4 @@
               </div>
             </div>
           </div>
-<?php include "../../footer.php";?>
-<script src="../../content/js/icheck.min.js"></script>
-<script src="../../content/js/moment.min.js"></script>
-<script src="../../content/js/custom.js"></script>
-
+<?php include "../footer.php";?>

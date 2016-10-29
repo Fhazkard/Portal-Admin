@@ -76,7 +76,7 @@
                 </li>                
                 <li><a><i class="fa fa-bar-chart-o"></i> Materi Belajar <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="chartjs.html">Data Materi Belajar</a>
+                      <li><a href="materi/index.php">Data Materi Belajar</a>
                     </li>
                   </ul>
                 </li>
@@ -114,7 +114,8 @@
       </div><!-- top navigation -->   
     <div class="right_col" role="main">
         <!-- top tiles -->
-        <div class="row tile_count">
+        <!-- Total Dashboard -->
+       <!-- <div class="row tile_count"> 
           <div class="animated bounceInLeft col-md-6 col-sm-6 col-xs-6 tile_stats_count pull-left " align="center">
               <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
               <div class="count">2500</div>

@@ -23,16 +23,17 @@
     <div id="wrapper">
       <div id="login" class="animated bounceInDown form">
         <section class="login_content">
-          <form method="" action="dashboard/">
+            <form method="POST" action="koneksi/cek.php">
             <h1>Login Form</h1>
             <div>
             <strong>Username</strong>
-            <input id="username" name="" type="text" class="form-control" placeholder="Username" autofocus required maxlength="5" minlength="5"/>
+            <input id="username" name="username" type="text" class="form-control" placeholder="Username" autofocus required maxlength="5" minlength="5"/>
             </div>
             <div>
             <strong>Password</strong>
-            <input id="password" name="" type="password" class="form-control" placeholder="Password" required maxlength="8" minlength="4" />
+            <input id="password" name="password" type="password" class="form-control" placeholder="Password" required maxlength="8" minlength="4" />
             </div>
+            <?php require 'koneksi/csrf.php';session_start();CSRF::init();print CSRF::tokenInput(); ?>
             <div>
                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             </div>

@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,7 +102,11 @@
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                   <li><a href="javascript:;">  Ganti Password</a>
                   </li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  <li>
+                      <form action="../koneksi/logout.php" method="post" style="width: auto;">                      
+                          <input id="logout" type="submit" name="logout" value="Log Out">
+                           <?php require '../koneksi/csrf.php';CSRF::init();print CSRF::tokenInput(); ?> 
+                      </form>
                   </li>
                 </ul>
               </li>            

@@ -18,6 +18,7 @@
 
   <link href="../content/css/site.css" rel="stylesheet">
   <script src="../content/js/jquery.min.js"></script>
+  <script src="../content/js/nprogress.js"></script>
   </head>
 <body class="nav-md">
 
@@ -91,7 +92,7 @@
             <div class="nav toggle">
               <a id="menu_toggle"><i class="animated bounceIn fa fa-bars"></i></a>
             </div>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right ">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                   <img src="../content/img/user.jpg" alt="">Fhazkard
@@ -110,30 +111,50 @@
       </div><!-- top navigation -->   
     <div class="right_col" role="main">
         <!-- Total Dashboard -->
-       <div class="row tile_count"> 
-          <div class="animated bounceInLeft col-md-6 col-sm-6 col-xs-6 tile_stats_count pull-left " align="center">
-              <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-              <div class="count">2500</div>
-              <span class="count_bottom"><i class="green">4% </i> From last Week</span>  
+       <div class="row tile_count">
+          <div class="animated bounceInLeft col-md-3 col-sm-6 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-user"></i> Total Murid</span>
+              <div class="count green">50</div>
+              <span class="count_bottom">Kelas Bahasa Mandarin</span>
+            </div>
           </div>
-          <div class="animated bounceInRight col-md-6 col-sm-6 col-xs-6 tile_stats_count pull-right" align="center">     
-              <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-              <div class="count">123.50</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>       
-          </div>        
-        </div> <!-- /top tiles -->
+          <div class="animated bounceInUp col-md-3 col-sm-6 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-user"></i> Total Murid</span>
+              <div class="count green">45</div>
+              <span class="count_bottom">Kelas Bahasa Inggris</span>
+            </div>
+          </div>
+          <div class="animated bounceInDown col-md-3 col-sm-6 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-user"></i> Total Murid</span>
+              <div class="count green">25</div>
+              <span class="count_bottom">Kelas Matematika</span>
+            </div>
+          </div>
+          <div class="animated bounceInRight col-md-3 col-sm-6 col-xs-6 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-user"></i> Total Murid</span>
+              <div class="count green">30</div>
+              <span class="count_bottom">Kelas Playgroup</span>
+            </div>
+          </div>
+        </div><!-- Total Dashboard -->
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="dashboard_graph" style="width: 100%; height:400px;">
+            <div class="dashboard_graph" style="width: 100%; height:100%;">
               <div class="row x_title">
                 <div class="col-md-6">
-                  <h3>Grafik Data <small> - Murid Per Sekolah</small></h3>
+                  <h3>Grafik Data Murid<small> - Per Kelas Bimbel</small></h3>
                 </div>
               </div>
               <div class="col-md-9 col-sm-9 col-xs-12">
-                <div id="placeholder33" style="height: 100%; display: none" class="demo-placeholder"></div>
-                <div style="width: 100%;">
-                  <div id="canvas_dahs" class="demo-placeholder" style="width: 100%; height:100%;"></div>
+                <div id="mainb" style="width: 100%; height:400px;">           
                 </div>
               </div>
               <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
@@ -146,16 +167,18 @@
                   <div>
                     <p>Sekolah 1</p>
                     <div class="">
-                      <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
+                      <div class="progress progress_lg" style="width: 100%;">
+                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"><strong>30</strong></div>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-6">
                   <div>
                     <p>Sekolah 2</p>
                     <div class="">
-                      <div class="progress progress_sm" style="width: 76%;">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
+                      <div class="progress progress_lg" style="width: 100%;">
+                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="22"><strong>22</strong></div>
                       </div>
                     </div>
                   </div>
@@ -164,16 +187,28 @@
                   <div>
                     <p>Sekolah 3</p>
                     <div class="">
-                      <div class="progress progress_sm" style="width: 76%;">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
+                      <div class="progress progress_lg" style="width: 100%;">
+                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="18"><strong>18</strong></div>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-6">
                   <div>
                     <p>Sekolah 4</p>
                     <div class="">
-                      <div class="progress progress_sm" style="width: 76%;">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                      <div class="progress progress_lg" style="width: 100%;">
+                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="12"><strong>12</strong></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-6">
+                  <div>
+                    <p>Sekolah 5</p>
+                    <div class="">
+                      <div class="progress progress_lg" style="width: 100%;">
+                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="8"><strong>8</strong></div>
                       </div>
                     </div>
                   </div>
@@ -195,9 +230,119 @@
     </div><!-- main container -->
   </div><!-- body container -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="../content/js/icheck.min.js"></script>
+<script src="../content/js/bootstrap-progressbar.min.js"></script>
 <script src="../content/js/moment.min.js"></script>
+<script src="../content/js/chart.min.js"></script>
 <script src="../content/js/custom.js"></script>
+<script src="../content/js/jquery.nicescroll.min.js"></script>
+<script src="../content/js/echarts-all.js"></script>
+<script src="../content/js/green.js"></script>
+  <script>
+    var myChart9 = echarts.init(document.getElementById('mainb'), theme);
+    myChart9.setOption({
+      title: {
+        text: 'Kelas Bimbel',
+        //subtext: 'Graph Sub-text'
+      },
+      //theme : theme,
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['B. Mandarin', 'B. Inggris', 'Matematika', 'Playgroup']
+      },
+      toolbox: {
+        show: false
+      },
+      calculable: false,
+      xAxis: [{
+        type: 'category',
+        data: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+      }],
+      yAxis: [{
+        type: 'value'
+      }],
+      series: [{
+        name: 'B. Mandarin',
+        type: 'bar',
+        data: [10.0, 12.0, 16.0, 24.0, 30.0, 32.0, 40.0, 50.0, 32.0, 28.0, 28.0, 32.0],
+        markPoint: {
+          data: [{
+            type: 'max',
+            name: 'Murid'
+          }, {
+            type: 'min',
+            name: 'Murid'
+          }]
+        },
+        markLine: {
+          data: [{
+            type: 'average',
+            name: 'Murid'
+          }]
+        }
+      }, {
+        name: 'B. Inggris',
+        type: 'bar',
+        data: [10.0, 14.0, 18.0, 24.0, 30.0, 32.0, 42.0, 45.0, 38.0, 28.0, 24.0, 36.0],
+        markPoint: {
+          data: [{
+            type: 'max',
+            name: 'Murid'
+          }, {
+            type: 'min',
+            name: 'Murid'
+          }]
+        },
+        markLine: {
+          data: [{
+            type: 'average',
+            name: '???'
+          }]
+        }
+      },
+        {
+        name: 'Matematika',
+        type: 'bar',
+        data: [4.0, 8.0, 12.0, 20.0, 28.0, 32.0, 30.0, 36.0, 40.0, 32.0, 21.0, 28.0],
+        markPoint: {
+          data: [{
+            type: 'max',
+            name: 'Murid'
+          }, {
+            type: 'min',
+            name: 'Murid'
+          }]
+        },
+        markLine: {
+          data: [{
+            type: 'average',
+            name: '???'
+          }]
+        }
+      },
+        {
+        name: 'Playgroup',
+        type: 'bar',
+        data: [12.0, 16.0, 20.0, 24.0, 28.0, 35.0, 40.0, 42.0, 48.0, 54.0, 44.0, 38.0],
+        markPoint: {
+          data: [{
+            type: 'max',
+            name: 'Murid'
+          }, {
+            type: 'min',
+            name: 'Murid'
+          }]
+        },
+        markLine: {
+          data: [{
+            type: 'average',
+            name: '???'
+          }]
+        }
+      }]//series
+    });//setOption
+  </script>
 </body>
 </html>
 

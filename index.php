@@ -15,6 +15,7 @@
   <!-- Custom styling plus plugins -->
   <link href="content/css/custom.css" rel="stylesheet">  
   <script src="content/js/jquery.min.js"></script>
+  
 </head>
 
 <body style="background:#F7F7F7;">
@@ -26,11 +27,11 @@
             <h1>Login Form</h1>
             <div>
             <strong>Username</strong>
-              <input type="text" class="form-control" placeholder="Username" required autofocus />
+            <input id="username" name="" type="text" class="form-control" placeholder="Username" autofocus required maxlength="5" minlength="5"/>
             </div>
             <div>
             <strong>Password</strong>
-              <input type="password" class="form-control" placeholder="Password" required />
+            <input id="password" name="" type="password" class="form-control" placeholder="Password" required maxlength="8" minlength="4" />
             </div>
             <div>
                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
@@ -41,7 +42,7 @@
             <div class="clearfix"></div>
             <br />
             <div>
-                <h1><i class="fa fa-paw" style="font-size: 26px;"></i> Bimbel Wisdom Batam</h1>
+                <h1 class="animated rubberBand"><i class="fa fa-paw" style="font-size: 26px;"></i> Bimbel Wisdom Batam</h1>
                 <p>©2016 Created By <a href="https://Fhazkard.com"><strong>Fhazkard</strong></a></p>
             </div>
             </div>
@@ -51,7 +52,5 @@
         <!-- content -->
       </div>
     </div>
-
 </body>
-
 </html>

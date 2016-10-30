@@ -1,4 +1,14 @@
 <?php include "../header.php";?>     
+<!-- CSS --> 
+  <link href="../content/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../content/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../content/css/animate.min.css" rel="stylesheet">
+  <!-- Custom styling plus plugins -->
+  <link href="../content/css/custom.css" rel="stylesheet">
+  <link href="../content/css/site.css" rel="stylesheet">
+  
+  <script src="../content/js/jquery.min.js"></script>
+  <script src="../content/js/nprogress.js"></script>
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="dashboard_graph" style="width: 100%; height:400px;">
@@ -60,5 +70,9 @@
             </div><!-- dashboard graph -->
           </div>
         </div><!-- row -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../content/js/icheck.min.js"></script>
+<script src="../content/js/moment.min.js"></script>
+<script src="../content/js/custom.js"></script>
 <?php include "../footer.php";?>
 

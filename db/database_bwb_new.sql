@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2016 at 08:20 AM
+-- Generation Time: Oct 30, 2016 at 08:34 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -40,10 +40,23 @@ CREATE TABLE `admin` (
 --
 
 CREATE TABLE `kelas` (
-  `kode_kelas` varchar(5) NOT NULL,
-  `kode_sekolah` varchar(5) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `total_murid` int(2) NOT NULL
+  `id` int(11) NOT NULL,
+  `sekolah_id` int(11) DEFAULT NULL,
+  `kode` varchar(15) NOT NULL,
+  `nama` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kelas_bimbel`
+--
+
+CREATE TABLE `kelas_bimbel` (
+  `id` int(11) NOT NULL,
+  `pengajar_id` int(11) DEFAULT NULL,
+  `kode` varchar(15) NOT NULL,
+  `nama` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -79,13 +92,13 @@ CREATE TABLE `login` (
 --
 
 CREATE TABLE `materi` (
-  `kode_materi` varchar(5) NOT NULL,
-  `kode_admin` varchar(5) NOT NULL,
-  `kode_kelas` varchar(5) NOT NULL,
-  `judul` text NOT NULL,
-  `isi` text NOT NULL,
-  `tgl` date NOT NULL,
-  `lokasi_file` text NOT NULL
+  `id` int(11) NOT NULL,
+  `bimbel_id` int(11) NOT NULL,
+  `kelas_id` int(11) DEFAULT NULL,
+  `judul` varchar(25) NOT NULL,
+  `keterangan` text NOT NULL,
+  `date` date NOT NULL,
+  `file_location` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -126,11 +139,12 @@ CREATE TABLE `naik_kelas` (
 --
 
 CREATE TABLE `pengajar` (
-  `kode_pengajar` varchar(5) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `umur` int(2) NOT NULL,
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
-  `tlp` varchar(20) NOT NULL
+  `tlpn` varchar(20) NOT NULL,
+  `umur` int(11) NOT NULL,
+  `jenis_kelamin` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -162,9 +176,13 @@ ALTER TABLE `admin`
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD PRIMARY KEY (`kode_kelas`),
-  ADD UNIQUE KEY `nama` (`nama`),
-  ADD KEY `kelas_fk0` (`kode_sekolah`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `kelas_bimbel`
+--
+ALTER TABLE `kelas_bimbel`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `les`
@@ -186,9 +204,7 @@ ALTER TABLE `login`
 -- Indexes for table `materi`
 --
 ALTER TABLE `materi`
-  ADD PRIMARY KEY (`kode_materi`),
-  ADD KEY `materi_fk0` (`kode_admin`),
-  ADD KEY `materi_fk1` (`kode_kelas`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `murid`
@@ -211,8 +227,7 @@ ALTER TABLE `naik_kelas`
 -- Indexes for table `pengajar`
 --
 ALTER TABLE `pengajar`
-  ADD PRIMARY KEY (`kode_pengajar`),
-  ADD UNIQUE KEY `nama` (`nama`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sekolah`
@@ -222,40 +237,38 @@ ALTER TABLE `sekolah`
   ADD UNIQUE KEY `nama` (`nama`);
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Constraints for table `kelas`
+-- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD CONSTRAINT `kelas_fk0` FOREIGN KEY (`kode_sekolah`) REFERENCES `sekolah` (`kode_sekolah`);
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- Constraints for table `les`
+-- AUTO_INCREMENT for table `kelas_bimbel`
 --
-ALTER TABLE `les`
-  ADD CONSTRAINT `les_fk0` FOREIGN KEY (`kode_pengajar`) REFERENCES `pengajar` (`kode_pengajar`);
+ALTER TABLE `kelas_bimbel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `materi`
+--
+ALTER TABLE `materi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pengajar`
+--
+ALTER TABLE `pengajar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
 
 --
 -- Constraints for table `login`
 --
 ALTER TABLE `login`
   ADD CONSTRAINT `login_fk0` FOREIGN KEY (`kode_murid`) REFERENCES `murid` (`kode_murid`);
-
---
--- Constraints for table `materi`
---
-ALTER TABLE `materi`
-  ADD CONSTRAINT `materi_fk0` FOREIGN KEY (`kode_admin`) REFERENCES `admin` (`kode_admin`),
-  ADD CONSTRAINT `materi_fk1` FOREIGN KEY (`kode_kelas`) REFERENCES `kelas` (`kode_kelas`);
-
---
--- Constraints for table `murid`
---
-ALTER TABLE `murid`
-  ADD CONSTRAINT `murid_fk0` FOREIGN KEY (`kode_kelas`) REFERENCES `kelas` (`kode_kelas`),
-  ADD CONSTRAINT `murid_fk1` FOREIGN KEY (`kode_les`) REFERENCES `les` (`kode_les`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -1,109 +1,81 @@
-<link href="../../content/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../content/css/font-awesome.min.css" rel="stylesheet">
-<link href="../../content/css/animate.min.css" rel="stylesheet">
-<!-- Custom styling plus plugins -->
-<link href="../../content/css/custom.css" rel="stylesheet">
-<link href="../../content/css/site.css" rel="stylesheet">
-<link href="../../content/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
-<script src="../../content/js/jquery.min.js"></script>
-<script src="../../content/js/nprogress.js"></script>
-<script src="../../content/js/moment.min.js"></script>
-<script src="../../content/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../../content/js/bootstrap-datetimepicker.min.js"></script>
-<script src="../../content/js/jquery.nicescroll.min.js" type="text/javascript"></script>
-<script src="../../content/js/custom.js"></script>
-<?php include "../../header.php";?>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>Upload File <small>(untuk mengupload materi pelajaran)</small></h2>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-          <br>
-          <form method="POST" action="Save.php" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-              <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date">Kelas Bimble <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select class="form-control" name="KelasBimble">
-                    <option value="None">Choose option</option>
-                    <option value="1">Bahasa Indonesia</option>
-                    <option value="2">Bahasa Ingris</option>
-                    <option value="3">Bahasa Mandarin</option>
-                    <option value="4">Option one</option>
-                    <option value="5">Option two</option>
-                  </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date">Kelas <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select class="form-control" name="Kelas">
-                    <option value="None">Choose option</option>
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
-                    <option value="3">Option three</option>
-                    <option value="4">Option four</option>
-                    <option value="5">Option one</option>
-                    <option value="6">Option two</option>
-                  </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date">Tanggal <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="input-group date" id="datetimepicker1">
-                    <input type='text' class="form-control" name="Date" />
-                    <span class="input-group-addon">
-                        <span class="fa fa-calendar"></span>
-                    </span>
+<?php include "../header.php";?>     
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Upload File <small>(untuk )</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br>
+                  <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5140"><ul class="parsley-errors-list" id="parsley-id-5140"></ul>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5583"><ul class="parsley-errors-list" id="parsley-id-5583"></ul>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" data-parsley-id="6816"><ul class="parsley-errors-list" id="parsley-id-6816"></ul>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div id="gender" class="btn-group" data-toggle="buttons">
+                          <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="2036"> &nbsp; Male &nbsp;
+                          </label><ul class="parsley-errors-list" id="parsley-id-multiple-gender"></ul>
+                          <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <input type="radio" name="gender" value="female" checked="" data-parsley-multiple="gender" data-parsley-id="2036"> Female
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" data-parsley-id="3561"><ul class="parsley-errors-list" id="parsley-id-3561"></ul>
+                      </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button type="submit" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                      </div>
+                    </div>
+
+                  </form>
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Judul <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="last-name" name="Judul" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5583"><ul class="parsley-errors-list" id="parsley-id-5583"></ul>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ext">Keterangan
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <textarea class="resizable_textarea form-control" style="width: 100%; overflow: hidden; word-wrap: break-word; resize: horizontal; height: 74px;" data-autosize-on="true" name="Keterangan"></textarea>
-              </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ext">File
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="file" id="file">
-                </div>
-            </div>
-            <div class="ln_solid"></div>
-            <div class="form-group">
-              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button type="submit" class="btn btn-primary">Cancel</button>
-                <button type="submit" class="btn btn-success">Submit</button>
-              </div>
-            </div>
-
-          </form>
-        </div>
-      </div>
-    </div>
-</div>
-<?php include "../../footer.php";?>
-
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-    });
-</script>
+          </div>
+<?php include "../footer.php";?>

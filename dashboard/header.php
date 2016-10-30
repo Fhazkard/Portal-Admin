@@ -8,6 +8,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
+
+  <!-- CSS --> 
+  <link href="../../content/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../content/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../../content/css/animate.min.css" rel="stylesheet">
+  <!-- Custom styling plus plugins -->
+  <link href="../../content/css/custom.css" rel="stylesheet">
+  <link href="../../content/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="../../content/css/responsive.bootstrap.min.css" rel="stylesheet">
+  
+  <link href="../../content/css/site.css" rel="stylesheet">  
+  <script src="../../content/js/jquery.min.js"></script>
   </head>
 <body class="nav-md">
 
@@ -16,13 +28,13 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Bimbel Wisdom</span></a>
+            <a href="../" class="site_title"><i class="fa fa-paw"></i> <span>Bimbel Wisdom</span></a>
           </div>
             <div class="clearfix"></div>
           <!-- menu prile quick info -->
           <div class="profile">
             <div class="profile_pic">
-              <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+              <img src="../../content/img/user.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -35,37 +47,33 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>Dashboard</h3>
+                 <br> <div class="clearfix"></div>
               <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="index.html">Data Murid</a>
-                    </li>
-                    <li><a href="index2.html">Data Pengajar</a>
-                    </li>
-                    <li><a href="index3.html">Data Sekolah</a>
-                    </li>
-                  </ul>
+                <li><a href="../"><i class="fa fa-home"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Input Data <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i> Master Data <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="form.html">Data Murid</a>
+                    <li><a href="../murid/">Data Murid</a>
                     </li>
-                    <li><a href="form_advanced.html">Data Pengajar</a>
+                    <li><a href="../bimbel/">Data Kelas Bimbel</a>
                     </li>
-                    <li><a href="form_validation.html">Data Sekolah</a>
+                    <li><a href="../pengajar/">Data Pengajar</a>
+                    </li>
+                    <li><a href="../kelas/">Data Kelas Sekolah</a>
+                    </li>
+                    <li><a href="../sekolah/">Data Sekolah</a>
                     </li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-desktop"></i> Akademik <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="general_elements.html">Data Kelas</a>
+                    <li><a href="../akademik-bimbel/">Data Kelas Bimbel</a>
                     </li>
                   </ul>
                 </li>                
                 <li><a><i class="fa fa-bar-chart-o"></i> Materi Belajar <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                      <li><a href="materi/index.php">Data Materi Belajar</a>
+                      <li><a href="../materi/">Data Materi Belajar</a>
                     </li>
                   </ul>
                 </li>
@@ -87,7 +95,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">Fhazkard
+                  <img src="../../content/img/user.jpg" alt="">Fhazkard
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -102,17 +110,4 @@
         </div><!-- nav menu -->
       </div><!-- top navigation -->   
     <div class="right_col" role="main">
-        <!-- top tiles -->
-        <!-- Total Dashboard -->
-       <!-- <div class="row tile_count"> 
-          <div class="animated bounceInLeft col-md-6 col-sm-6 col-xs-6 tile_stats_count pull-left " align="center">
-              <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-              <div class="count">2500</div>
-              <span class="count_bottom"><i class="green">4% </i> From last Week</span>  
-          </div>
-          <div class="animated bounceInRight col-md-6 col-sm-6 col-xs-6 tile_stats_count pull-right" align="center">     
-              <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-              <div class="count">123.50</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>       
-          </div>        
-        </div> <!-- /top tiles -->
+        

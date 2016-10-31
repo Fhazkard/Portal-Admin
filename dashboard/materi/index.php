@@ -1,9 +1,12 @@
-<?php include "../header.php";?>     
+<?php 
+include ("../header.php");
+include ("Save.php");
+?>     
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Upload File <small>(untuk )</small></h2>
+                  <h2>Upload File <small>(untuk upload materi bimbel)</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -23,56 +26,64 @@
                 </div>
                 <div class="x_content">
                   <br>
-                  <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-
+                  <form method="POST" action="" enctype="multipart/form-data" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kelas Bimble <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5140"><ul class="parsley-errors-list" id="parsley-id-5140"></ul>
+                          <select class="form-control" name="KelasBimble" onchange="document.getElementById('KelasBimble_Name').value=this.options[this.selectedIndex].text">
+                              <option value="0">None</option>
+                              <option value="1">Bahasa Inggris</option>
+                              <option value="2">Bahasa Indonesia</option>
+                              <option value="3">Bahasa Mandarin</option>
+                              <option value="4">Matematika</option>
+                              <option value="5">Fisika</option>
+                              <option value="6">Biologi</option>
+                          </select>
+                          <input type="hidden" name="KelasBimble_Name" id="KelasBimble_Name" value="" />
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kelas <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5583"><ul class="parsley-errors-list" id="parsley-id-5583"></ul>
+                          <select class="form-control" name="Kelas" onchange="document.getElementById('Kelas_Name').value=this.options[this.selectedIndex].text">
+                              <option value="0">None</option>
+                              <option value="1">Kelas 1</option>
+                              <option value="2">Kelas 2</option>
+                              <option value="3">Kelas 3</option>
+                              <option value="4">Kelas 4</option>
+                              <option value="5">Kelas 5</option>
+                              <option value="6">Kelas 6</option>
+                          </select>
+                          <input type="hidden" name="Kelas_Name" id="Kelas_Name" value="" />
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
+                      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Judul</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" data-parsley-id="6816"><ul class="parsley-errors-list" id="parsley-id-6816"></ul>
+                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="Judul" data-parsley-id="6816"><ul class="parsley-errors-list" id="parsley-id-6816"></ul>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div id="gender" class="btn-group" data-toggle="buttons">
-                          <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="2036"> &nbsp; Male &nbsp;
-                          </label><ul class="parsley-errors-list" id="parsley-id-multiple-gender"></ul>
-                          <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="female" checked="" data-parsley-multiple="gender" data-parsley-id="2036"> Female
-                          </label>
+                          <textarea class="form-control" name="Keterangan"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">File</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" name="data_upload" />
                         </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" data-parsley-id="3561"><ul class="parsley-errors-list" id="parsley-id-3561"></ul>
-                      </div>
                     </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-success" name="Save">Submit</button>
                       </div>
                     </div>
-
                   </form>
                 </div>
               </div>

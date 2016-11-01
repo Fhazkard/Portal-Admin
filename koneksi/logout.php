@@ -14,5 +14,9 @@ if(isset($_REQUEST['logout'])){
 	window.location = '../'</script>";
 	unset($_SESSION['limit']);
 	session_destroy();	
+}else{
+	die("<script>alert('Error Load Page!') 
+	window.location = '../'</script>");
+	session_destroy();
 }
 ?>

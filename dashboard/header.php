@@ -1,3 +1,19 @@
+<?php  session_start();require '../../koneksi/csrf.php';CSRF::init();
+if(isset($_SESSION['limit']))
+{
+	$limit = $_SESSION['limit'];
+	if (time() < $limit){		
+	}else{
+		die("<script>alert('Silahkan Login Ulang!') 
+		window.location = '../../'</script>");
+		unset($_SESSION['limit']);
+		session_destroy();
+	}
+}else{
+	die("<script>alert('Error Load Page!') 
+	window.location = '../'</script>");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +36,7 @@
   
   <link href="../../content/css/site.css" rel="stylesheet">  
   <script src="../../content/js/jquery.min.js"></script>
+  <script src="../../content/js/nprogress.js" type="text/javascript"></script>
   </head>
 <body class="nav-md">
 
@@ -65,12 +82,12 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-desktop"></i> Akademik <span class="fa fa-chevron-down"></span></a>
+<!--                <li><a><i class="fa fa-desktop"></i> Akademik <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="../akademik-bimbel/">Data Kelas Bimbel</a>
                     </li>
                   </ul>
-                </li>                
+                </li>                -->
                 <li><a><i class="fa fa-bar-chart-o"></i> Materi Belajar <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                       <li><a href="../materi/">Data Materi Belajar</a>
@@ -94,14 +111,18 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
               <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                   <img src="../../content/img/user.jpg" alt="">Fhazkard
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                   <li><a href="javascript:;">  Ganti Password</a>
                   </li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  <li>
+                      <form action="../../koneksi/logout.php" method="post" style="width: auto;">                      
+                          <input id="logout" type="submit" name="logout" value="Log Out">
+                           <?php print CSRF::tokenInput(); ?> 
+                      </form>
                   </li>
                 </ul>
               </li>            

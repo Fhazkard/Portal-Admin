@@ -42,3 +42,7 @@ td.last{
     text-decoration: none;
     background-color: #f5f5f5;
 }
+.btn-danger:hover{
+	background-color: #a51c17;
+    border-color: #a51c17;
+}

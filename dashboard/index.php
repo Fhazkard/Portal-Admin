@@ -1,4 +1,19 @@
-<?php session_start();?>
+<?php  session_start();require '../koneksi/csrf.php';CSRF::init();
+if(isset($_SESSION['limit']))
+{
+	$limit = $_SESSION['limit'];
+	if (time() < $limit){		
+	}else{
+		die("<script>alert('Silahkan Login Ulang!') 
+		window.location = '../'</script>");
+		unset($_SESSION['limit']);
+		session_destroy();
+	}
+}else{
+	die("<script>alert('Error Load Page!') 
+	window.location = '../'</script>");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,11 +30,10 @@
   <link href="../content/css/font-awesome.min.css" rel="stylesheet">
   <link href="../content/css/animate.min.css" rel="stylesheet">
   <!-- Custom styling plus plugins -->
-  <link href="../content/css/custom.css" rel="stylesheet">
-
-  <link href="../content/css/site.css" rel="stylesheet">
+  <link href="../content/css/custom.css" rel="stylesheet">  
+  <link href="../content/css/site.css" rel="stylesheet">  
   <script src="../content/js/jquery.min.js"></script>
-  <script src="../content/js/nprogress.js"></script>
+  <script src="../content/js/nprogress.js" type="text/javascript"></script>
   </head>
 <body class="nav-md">
 
@@ -28,13 +42,13 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="../dashboard/" class="site_title"><i class="fa fa-paw"></i> <span>Bimbel Wisdom</span></a>
+            <a href="../dashboard" class="site_title"><i class="fa fa-paw"></i> <span>Bimbel Wisdom</span></a>
           </div>
             <div class="clearfix"></div>
           <!-- menu prile quick info -->
           <div class="profile">
             <div class="profile_pic">
-                <img src="../content/img/user.jpg" alt="..." class="img-circle profile_img">
+              <img src="../content/img/user.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -47,14 +61,13 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-                <br> <div class="clearfix"></div>
+                 <br> <div class="clearfix"></div>
               <ul class="nav side-menu">
-                  <li><a href="../dashboard/"><i class="fa fa-home"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu" style="display: none"></ul>
+                <li><a href="../dashboard"><i class="fa fa-home"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Master Data <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                      <li><a href="../dashboard/murid/">Data Murid</a>
+                    <li><a href="../dashboard/murid/">Data Murid</a>
                     </li>
                     <li><a href="../dashboard/bimbel/">Data Kelas Bimbel</a>
                     </li>
@@ -66,12 +79,12 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-desktop"></i> Akademik <span class="fa fa-chevron-down"></span></a>
+<!--                <li><a><i class="fa fa-desktop"></i> Akademik <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="../dashboard/akademik-bimbel/">Data Kelas Bimbel</a>
+                    <li><a href="../akademik-bimbel/">Data Kelas Bimbel</a>
                     </li>
                   </ul>
-                </li>                
+                </li>                -->
                 <li><a><i class="fa fa-bar-chart-o"></i> Materi Belajar <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                       <li><a href="../dashboard/materi/">Data Materi Belajar</a>
@@ -93,9 +106,9 @@
             <div class="nav toggle">
               <a id="menu_toggle"><i class="animated bounceIn fa fa-bars"></i></a>
             </div>
-            <ul class="nav navbar-nav navbar-right ">
+            <ul class="nav navbar-nav navbar-right">
               <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                   <img src="../content/img/user.jpg" alt="">Fhazkard
                   <span class=" fa fa-angle-down"></span>
                 </a>
@@ -105,7 +118,7 @@
                   <li>
                       <form action="../koneksi/logout.php" method="post" style="width: auto;">                      
                           <input id="logout" type="submit" name="logout" value="Log Out">
-                           <?php require '../koneksi/csrf.php';CSRF::init();print CSRF::tokenInput(); ?> 
+                           <?php print CSRF::tokenInput(); ?> 
                       </form>
                   </li>
                 </ul>
@@ -115,6 +128,7 @@
         </div><!-- nav menu -->
       </div><!-- top navigation -->   
     <div class="right_col" role="main">
+         
         <!-- Total Dashboard -->
        <div class="row tile_count">
           <div class="animated bounceInLeft col-md-3 col-sm-6 col-xs-6 tile_stats_count">
@@ -225,6 +239,7 @@
         </div><!-- row -->
          <br />      
         <!-- footer content -->
+        <!-- footer content -->
         <footer class="footer">
           <div class="copyright-info">
             <p class="pull-right">Dashboard Bimbel Wisdom Admin By <a href="https://Fhazkard.com">Fhazkard</a>  
@@ -234,15 +249,14 @@
       </div><!-- right col -->    
     </div><!-- main container -->
   </div><!-- body container -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="../content/js/bootstrap-progressbar.min.js"></script>
-<script src="../content/js/moment.min.js"></script>
-<script src="../content/js/chart.min.js"></script>
-<script src="../content/js/custom.js"></script>
-<script src="../content/js/jquery.nicescroll.min.js"></script>
-<script src="../content/js/echarts-all.js"></script>
-<script src="../content/js/green.js"></script>
-  <script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" type="text/javascript"></script>
+	<script src="../content/js/bootstrap-progressbar.min.js" type="text/javascript"></script>
+	<script src="../content/js/moment.min.js" type="text/javascript"></script>
+	<script src="../content/js/custom.js" type="text/javascript"></script>
+	<script src="../content/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+	<script src="../content/js/echarts-all.js" type="text/javascript"></script>
+	<script src="../content/js/theme-echart.js" type="text/javascript"></script>
+        <script type="text/javascript">
     var myChart9 = echarts.init(document.getElementById('mainb'), theme);
     myChart9.setOption({
       title: {
@@ -302,7 +316,7 @@
         markLine: {
           data: [{
             type: 'average',
-            name: '???'
+            name: 'Rata-rata'
           }]
         }
       },
@@ -322,7 +336,7 @@
         markLine: {
           data: [{
             type: 'average',
-            name: '???'
+            name: 'Rata-rata'
           }]
         }
       },
@@ -342,7 +356,7 @@
         markLine: {
           data: [{
             type: 'average',
-            name: '???'
+            name: 'Rata-rata'
           }]
         }
       }]//series
@@ -350,4 +364,3 @@
   </script>
 </body>
 </html>
-

@@ -15,7 +15,7 @@
                         <th>Bimbel</th>
                         <th>Kelas</th>
                         <th>Sekolah</th>
-						<th>Tanggal Lahir</th>
+						<th>TTL</th>
 						<th>Jenis Kelamin</th>
 						<th>Alamat</th>
 						<th>Orang Tua</th>
@@ -27,24 +27,39 @@
 					<?php
 						include '../../koneksi/konek.php';
 
-						$selek_data = mysqli_query($koneksi, "SELECT * FROM murid");
+						$selek_data = mysqli_query($koneksi, "SELECT murid.murid_id,murid.sekolah_id,murid.kelas_id,murid.bimbel_id,murid.nama, 
+																murid.tgl_lahir, murid.jk, murid.alamat, murid.nama_ortu, murid.tlp,
+																sekolah.nama AS sekolah, kelas.nama AS kelas, bimbel.nama AS bimbel FROM murid 
+																JOIN sekolah ON sekolah.sekolah_id = murid.sekolah_id
+																JOIN kelas ON kelas.kelas_id =  murid.kelas_id
+																JOIN bimbel ON bimbel.bimbel_id = murid.bimbel_id");
 						while($data = mysqli_fetch_array($selek_data)){
 							?>                  
                       <tr class=" ">
                         <td class=" "><?php echo $data['nama']; ?></td>
-                        <td class=" "><?php echo $data['jenis']; ?></td>
+                        <td class=" "><?php echo $data['bimbel']; ?></td>
+						<td class=" "><?php echo $data['kelas']; ?></td>
+						<td class=" "><?php echo $data['sekolah']; ?></td>
+						<td class=" "><?php echo $data['tgl_lahir']; ?></td>
+						<td class=" "><?php echo $data['jk']; ?></td>
                         <td class=" "><?php echo $data['alamat']; ?></td>
+						<td class=" "><?php echo $data['nama_ortu']; ?></td>
                         <td class="a-right a-right "><?php echo $data['tlp']; ?></td>
                         <td class=" last">
 							<a id="edit_link" href="#" class="btn btn-info btn-xs last" data-toggle="modal" data-target=".edit" 
-							data-sekolah_id="<?php echo $data['sekolah_id']; ?>"
+							data-murid_id="<?php echo $data['murid_id']; ?>"
 							data-nama="<?php echo $data['nama']; ?>"
-							data-jenis="<?php echo $data['jenis']; ?>"
+							data-bimbel_id="<?php echo $data['bimbel_id']; ?>"
+							data-kelas_id="<?php echo $data['kelas_id']; ?>"
+							data-sekolah_id="<?php echo $data['sekolah_id']; ?>"
+							data-tgl_lahir="<?php echo $data['tgl_lahir']; ?>"
+							data-jk="<?php echo $data['jk']; ?>"
+							data-ortu="<?php echo $data['nama_ortu']; ?>"
 							data-alamat="<?php echo $data['alamat']; ?>"
 							data-tlp="<?php echo $data['tlp']; ?>"><i class="fa fa-pencil"></i> Edit</a>
 							<form method="post" action="../../koneksi/delete.php" style="width:auto;float:right;">
-								<input type="hidden" name="delete_id" value="<?php echo $data['sekolah_id']; ?>">
-								<input id="module" type="hidden" name="module" value="sekolah">
+								<input type="hidden" name="delete_id" value="<?php echo $data['murid_id']; ?>">
+								<input id="module" type="hidden" name="module" value="murid">
 								<?php print CSRF::tokenInput(); ?>
 								<button type="submit" class="btn btn-danger btn-xs last" onclick="return konfirmasi()"><i class="fa fa-trash-o"></i> Delete</button>
 							</form>
@@ -63,41 +78,101 @@
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span>
                         </button>
-                        <h4 class="modal-title" id="">Tambah Data Sekolah</h4>
+                        <h4 class="modal-title" id="">Tambah Data Murid</h4>
                       </div>
                       <div class="modal-body">
 						<form method="POST" action="../../koneksi/tambah.php" class="form-horizontal form-label-left">
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Sekolah:</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Murid:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
-							<input type="text" name="nama" class="form-control" placeholder="Masukan Nama Sekolah" required autofocus>
+							<input type="text" name="nama" class="form-control" placeholder="Masukan Nama Murid" required autofocus>
 							</div>						
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Jenis Sekolah:</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Bimbel:</label>
 							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
-							<select name="jenis" class="form-control">
-								<option value="Nasional">Nasional</option>
-								<option value="Nasional Plus">Nasional Plus</option>
+							<select name="bimbel_id" class="form-control">
+							<?php 
+								include '../../koneksi/konek.php';
+								$selek_data = mysqli_query($koneksi, "SELECT * FROM bimbel");
+								while($data = mysqli_fetch_array($selek_data)){
+							?>
+								<option value="<?php echo $data['bimbel_id'];?>"><?php echo $data['nama'];?></option>
+							<?php
+							}
+							?>
 							</select>
 							</div>						
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Alamat Sekolah:</label>
-							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
-							<textarea name="alamat" class="form-control" rows="3" style="max-width:426px;max-height:150px;" required></textarea>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Kelas:</label>
+							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<select name="kelas_id" class="form-control">
+							<?php 
+								include '../../koneksi/konek.php';
+								$selek_data = mysqli_query($koneksi, "SELECT * FROM kelas");
+								while($data = mysqli_fetch_array($selek_data)){
+							?>
+								<option value="<?php echo $data['kelas_id'];?>"><?php echo $data['nama'];?></option>
+							<?php
+							}
+							?>
+							</select>
 							</div>						
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Telepon Sekolah:</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Sekolah:</label>
+							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<select name="sekolah_id" class="form-control">
+							<?php 
+								include '../../koneksi/konek.php';
+								$selek_data = mysqli_query($koneksi, "SELECT * FROM sekolah");
+								while($data = mysqli_fetch_array($selek_data)){
+							?>
+								<option value="<?php echo $data['sekolah_id'];?>"><?php echo $data['nama'];?></option>
+							<?php
+							}
+							?>
+							</select>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Tanggal Lahir:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
-							<input type="text" name="tlp" class="form-control" placeholder="Masukan Telepon Sekolah" required>
+							<input type="date" name="tgl_lahir" class="form-control" placeholder="Masukan Tanggal Lahir" required>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Jenis Kelamin:</label>
+							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<select name="jk" class="form-control">
+								<option value="Laki-laki">Laki-laki</option>
+								<option value="Perempuan">Perempuan</option>
+							</select>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Orang Tua:</label>
+							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<input type="text" name="ortu" class="form-control" placeholder="Masukan Nama Orang Tua" required>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Alamat Murid:</label>
+							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<textarea  name="alamat" class="form-control" rows="3" style="max-width:426px;max-height:150px;" required></textarea>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Telepon Murid:</label>
+							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<input  type="text" name="tlp" class="form-control" placeholder="Masukan Telepon Murid" required>
 							</div>						
 						</div>
 						<?php print CSRF::tokenInput(); ?>
                       </div>
 						<div class="modal-footer">
-						<input id="module" type="hidden" name="module" value="sekolah"> 
+						<input id="module" type="hidden" name="module" value="murid"> 
                         <button type="button" class="btn btn-default" data-dismiss="modal" style="margin:0px;">Keluar</button>
                         <button type="submit" class="btn btn-success">Tambah</button>
 						</div>
@@ -112,42 +187,102 @@
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span>
                         </button>
-                        <h4 class="modal-title" id="">Edit Data Sekolah</h4>
+                        <h4 class="modal-title" id="">Edit Data Murid</h4>
                       </div>
                       <div class="modal-body">
 						<form method="POST" action="../../koneksi/edit.php" class="form-horizontal form-label-left">
-						<input id="sekolah_id" type="hidden" name="sekolah_id"> 
+						<input id="murid_id" type="hidden" name="murid_id"> 
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Sekolah:</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Murid:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
-							<input id="nama" type="text" name="nama" class="form-control" placeholder="Masukan Nama Sekolah" required autofocus>
+							<input id="nama" type="text" name="nama" class="form-control" placeholder="Masukan Nama Murid" required autofocus>
 							</div>						
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Jenis Sekolah:</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Bimbel:</label>
 							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
-							<select id="jenis" name="jenis" class="form-control">
-								<option value="Nasional">Nasional</option>
-								<option value="Nasional Plus">Nasional Plus</option>
+							<select id="bimbel_id" name="bimbel_id" class="form-control">
+							<?php 
+								include '../../koneksi/konek.php';
+								$selek_data = mysqli_query($koneksi, "SELECT * FROM bimbel");
+								while($data = mysqli_fetch_array($selek_data)){
+							?>
+								<option value="<?php echo $data['bimbel_id'];?>"><?php echo $data['nama'];?></option>
+							<?php
+							}
+							?>
 							</select>
 							</div>						
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Alamat Sekolah:</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Kelas:</label>
+							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<select id="kelas_id" name="kelas_id" class="form-control">
+							<?php 
+								include '../../koneksi/konek.php';
+								$selek_data = mysqli_query($koneksi, "SELECT * FROM kelas");
+								while($data = mysqli_fetch_array($selek_data)){
+							?>
+								<option value="<?php echo $data['kelas_id'];?>"><?php echo $data['nama'];?></option>
+							<?php
+							}
+							?>
+							</select>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Sekolah:</label>
+							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<select id="sekolah_id" name="sekolah_id" class="form-control">
+							<?php 
+								include '../../koneksi/konek.php';
+								$selek_data = mysqli_query($koneksi, "SELECT * FROM sekolah");
+								while($data = mysqli_fetch_array($selek_data)){
+							?>
+								<option value="<?php echo $data['sekolah_id'];?>"><?php echo $data['nama'];?></option>
+							<?php
+							}
+							?>
+							</select>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Tanggal Lahir:</label>
+							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<input id="tgl_lahir" type="date" name="tgl_lahir" class="form-control" placeholder="Masukan Tanggal Lahir" required>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Jenis Kelamin:</label>
+							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<select id="jk" name="jk" class="form-control">
+								<option value="Laki-laki">Laki-laki</option>
+								<option value="Perempuan">Perempuan</option>
+							</select>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Orang Tua:</label>
+							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<input id="ortu" type="text" name="ortu" class="form-control" placeholder="Masukan Nama Orang Tua" required>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Alamat Murid:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
 							<textarea id="alamat" name="alamat" class="form-control" rows="3" style="max-width:426px;max-height:150px;" required></textarea>
 							</div>						
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Telepon Sekolah:</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Telepon Murid:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
-							<input id="tlp" type="text" name="tlp" class="form-control" placeholder="Masukan Telepon Sekolah" required>
+							<input id="tlp" type="text" name="tlp" class="form-control" placeholder="Masukan Telepon Murid" required>
 							</div>						
 						</div>
 						<?php print CSRF::tokenInput(); ?>
                       </div>
 						<div class="modal-footer">
-						<input id="module" type="hidden" name="module" value="sekolah"> 
+						<input id="module" type="hidden" name="module" value="murid"> 
                         <button type="button" class="btn btn-default" data-dismiss="modal" style="margin:0px;">Keluar</button>
                         <button type="submit" class="btn btn-success">Simpan</button>
 						</div>
@@ -157,12 +292,22 @@
                 </div>				
 				<script>
 				$(document).on("click", "#edit_link", function () {
-					var sekolah_id = $(this).data('sekolah_id');
-					$(".modal-body #sekolah_id").val( sekolah_id );
+					var murid_id = $(this).data('murid_id');
+					$(".modal-body #murid_id").val( murid_id );
 					var nama = $(this).data('nama');
 					$(".modal-body #nama").val( nama );
-					var jenis = $(this).data('jenis');
-					$(".modal-body #jenis").val( jenis );
+					var bimbel_id = $(this).data('bimbel_id');
+					$(".modal-body #bimbel_id").val( bimbel_id );
+					var kelas_id = $(this).data('kelas_id');
+					$(".modal-body #kelas_id").val( kelas_id );
+					var sekolah_id = $(this).data('sekolah_id');
+					$(".modal-body #sekolah_id").val( sekolah_id );
+					var tgl_lahir = $(this).data('tgl_lahir');
+					$(".modal-body #tgl_lahir").val( tgl_lahir );
+					var jk = $(this).data('jk');
+					$(".modal-body #jk").val( jk );
+					var ortu = $(this).data('ortu');
+					$(".modal-body #ortu").val( ortu );
 					var alamat = $(this).data('alamat');
 					$(".modal-body #alamat").val( alamat );
 					var tlp = $(this).data('tlp');

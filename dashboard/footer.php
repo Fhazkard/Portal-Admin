@@ -17,6 +17,7 @@
 	<script src="../../content/js/dataTables.responsive.min.js" type="text/javascript"></script>
 	<script src="../../content/js/responsive.bootstrap.min.js" type="text/javascript"></script>
 	<script src="../../content/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+	<script src="../../content/js/jasny-bootstrap.min.js" type="text/javascript"></script>
         <script type="text/javascript">
           $(document).ready(function() {
             $('#datatable-responsive').DataTable();            

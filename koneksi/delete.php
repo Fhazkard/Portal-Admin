@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 require 'konek.php';
 require 'csrf.php';
 require 'script.php';

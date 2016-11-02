@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2016 at 08:04 PM
+-- Generation Time: Nov 02, 2016 at 10:46 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -43,6 +43,26 @@ INSERT INTO `admin` (`admin_id`, `username`, `password`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bimbel`
+--
+
+CREATE TABLE `bimbel` (
+  `bimbel_id` int(11) NOT NULL,
+  `pengajar_id` int(11) DEFAULT NULL,
+  `nama` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bimbel`
+--
+
+INSERT INTO `bimbel` (`bimbel_id`, `pengajar_id`, `nama`) VALUES
+(2, 3, 'Bahasa Mandarin'),
+(3, 2, 'Matematika');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kelas`
 --
 
@@ -76,18 +96,6 @@ INSERT INTO `kelas` (`kelas_id`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelas_bimbel`
---
-
-CREATE TABLE `kelas_bimbel` (
-  `bimbel_id` int(11) NOT NULL,
-  `pengajar_id` int(11) DEFAULT NULL,
-  `nama` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `login`
 --
 
@@ -108,6 +116,7 @@ CREATE TABLE `materi` (
   `materi_id` int(11) NOT NULL,
   `bimbel_id` int(11) DEFAULT NULL,
   `kelas_id` int(11) DEFAULT NULL,
+  `sekolah_id` int(11) DEFAULT NULL,
   `judul` varchar(25) NOT NULL,
   `keterangan` text NOT NULL,
   `date` date NOT NULL,
@@ -133,6 +142,14 @@ CREATE TABLE `murid` (
   `tlp` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `murid`
+--
+
+INSERT INTO `murid` (`murid_id`, `sekolah_id`, `kelas_id`, `bimbel_id`, `nama`, `tgl_lahir`, `jk`, `alamat`, `nama_ortu`, `tlp`) VALUES
+(1, 2, 14, 2, 'Doni', '1995-08-02', 'Laki-laki', 'Baloi', 'Larasati', '0812 4430 5530'),
+(2, 1, 10, 3, 'Lia', '1997-11-01', 'Perempuan', 'Jodoh', 'Hendra', '0812 2210 4210');
+
 -- --------------------------------------------------------
 
 --
@@ -155,11 +172,19 @@ CREATE TABLE `naik_kelas` (
 CREATE TABLE `pengajar` (
   `pengajar_id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
-  `alamat` text NOT NULL,
-  `tlp` varchar(20) NOT NULL,
   `umur` int(11) NOT NULL,
-  `jk` varchar(20) NOT NULL
+  `jk` varchar(20) NOT NULL,
+  `alamat` text NOT NULL,
+  `tlp` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pengajar`
+--
+
+INSERT INTO `pengajar` (`pengajar_id`, `nama`, `umur`, `jk`, `alamat`, `tlp`) VALUES
+(2, 'Sanda', 27, 'Laki-laki', 'Tiban 3 Batam', '0812 6630 3990'),
+(3, 'Jessica', 24, 'perempuan', 'Batam Centre', '0812 3660 2440');
 
 -- --------------------------------------------------------
 
@@ -198,17 +223,17 @@ ALTER TABLE `admin`
   ADD UNIQUE KEY `nama` (`nama`);
 
 --
+-- Indexes for table `bimbel`
+--
+ALTER TABLE `bimbel`
+  ADD PRIMARY KEY (`bimbel_id`),
+  ADD KEY `pengajar_id` (`pengajar_id`);
+
+--
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
   ADD PRIMARY KEY (`kelas_id`);
-
---
--- Indexes for table `kelas_bimbel`
---
-ALTER TABLE `kelas_bimbel`
-  ADD PRIMARY KEY (`bimbel_id`),
-  ADD UNIQUE KEY `pengajar_id` (`pengajar_id`);
 
 --
 -- Indexes for table `login`
@@ -224,7 +249,8 @@ ALTER TABLE `login`
 ALTER TABLE `materi`
   ADD PRIMARY KEY (`materi_id`),
   ADD UNIQUE KEY `bimbel_id` (`bimbel_id`),
-  ADD UNIQUE KEY `kelas_id` (`kelas_id`);
+  ADD KEY `kelas_id` (`kelas_id`),
+  ADD KEY `sekolah_id` (`sekolah_id`);
 
 --
 -- Indexes for table `murid`
@@ -267,15 +293,15 @@ ALTER TABLE `sekolah`
 ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `bimbel`
+--
+ALTER TABLE `bimbel`
+  MODIFY `bimbel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
   MODIFY `kelas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT for table `kelas_bimbel`
---
-ALTER TABLE `kelas_bimbel`
-  MODIFY `bimbel_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `login`
 --
@@ -290,7 +316,7 @@ ALTER TABLE `materi`
 -- AUTO_INCREMENT for table `murid`
 --
 ALTER TABLE `murid`
-  MODIFY `murid_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `murid_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `naik_kelas`
 --
@@ -300,7 +326,7 @@ ALTER TABLE `naik_kelas`
 -- AUTO_INCREMENT for table `pengajar`
 --
 ALTER TABLE `pengajar`
-  MODIFY `pengajar_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pengajar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `sekolah`
 --
@@ -311,9 +337,9 @@ ALTER TABLE `sekolah`
 --
 
 --
--- Constraints for table `kelas_bimbel`
+-- Constraints for table `bimbel`
 --
-ALTER TABLE `kelas_bimbel`
+ALTER TABLE `bimbel`
   ADD CONSTRAINT `fg_pengajar_id` FOREIGN KEY (`pengajar_id`) REFERENCES `pengajar` (`pengajar_id`);
 
 --
@@ -326,14 +352,15 @@ ALTER TABLE `login`
 -- Constraints for table `materi`
 --
 ALTER TABLE `materi`
-  ADD CONSTRAINT `fg_bimbel_id` FOREIGN KEY (`bimbel_id`) REFERENCES `kelas_bimbel` (`bimbel_id`),
-  ADD CONSTRAINT `fg_kelas_id` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`kelas_id`);
+  ADD CONSTRAINT `fg-bimbel-id` FOREIGN KEY (`bimbel_id`) REFERENCES `bimbel` (`bimbel_id`),
+  ADD CONSTRAINT `fg-kelas-id` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`kelas_id`),
+  ADD CONSTRAINT `fg-sekolah-id` FOREIGN KEY (`sekolah_id`) REFERENCES `sekolah` (`sekolah_id`);
 
 --
 -- Constraints for table `murid`
 --
 ALTER TABLE `murid`
-  ADD CONSTRAINT `fg-bimbel_id` FOREIGN KEY (`bimbel_id`) REFERENCES `kelas_bimbel` (`bimbel_id`),
+  ADD CONSTRAINT `fg-bimbel_id` FOREIGN KEY (`bimbel_id`) REFERENCES `bimbel` (`bimbel_id`),
   ADD CONSTRAINT `fg-kelas_id` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`kelas_id`),
   ADD CONSTRAINT `fg-sekolah_id` FOREIGN KEY (`sekolah_id`) REFERENCES `sekolah` (`sekolah_id`);
 

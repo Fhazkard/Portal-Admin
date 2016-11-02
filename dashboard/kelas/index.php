@@ -54,7 +54,7 @@
                       <div class="modal-body">
 						<form method="POST" action="../../koneksi/tambah.php" class="form-horizontal form-label-left">
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Sekolah:</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Kelas:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
 							<input type="text" name="nama" class="form-control" placeholder="Masukan Nama Kelas" required autofocus>
 							</div>						
@@ -83,7 +83,7 @@
 						<form method="POST" action="../../koneksi/edit.php" class="form-horizontal form-label-left">
 						<input id="kelas_id" type="hidden" name="kelas_id"> 
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Sekolah:</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Nama Kelas:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
 							<input id="nama" type="text" name="nama" class="form-control" placeholder="Masukan Nama Kelas" required autofocus>
 							</div>						

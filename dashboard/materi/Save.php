@@ -1,20 +1,12 @@
 <?php
 require "../../koneksi/konek.php";
-function UploadFile($subFolder, $file_name){
-    if (move_uploaded_file($_FILES['file']['tmp_name'], $subFolder)) {
-            echo'Berhasil Di simpan file dengan nama'."$file_name";
-        }
-        else{
-            echo 'Gagal Disimpan file dengan nama'."$file_name";
-        }
-}
 if (isset($_POST["Save"])) {
     $file_name	= $_FILES["data_upload"]["name"];
     $file_size	= $_FILES["data_upload"]["size"];
-    $KelasBimbel = $_REQUEST["KelasBimble"];
-    $Kelas = $_REQUEST["Kelas"];
-    $Judul = $_REQUEST["Judul"];
-    $Keterangan = $_REQUEST["Keterangan"];
+    $KelasBimbel = $_REQUEST["bimbel_id"];
+    $Kelas = $_REQUEST["kelas_id"];
+    $Judul = $_REQUEST["judul"];
+    $Keterangan = $_REQUEST["keterangan"];
     $KelasBimbel_Name = $_REQUEST["KelasBimble_Name"];
     $Kelas_Name = $_REQUEST["Kelas_Name"];
     $directory = "../../Upload/$KelasBimbel_Name";
@@ -53,21 +45,4 @@ if (isset($_POST["Save"])) {
     $koneksi->close();
     
 }
-/*$sql = "INSERT INTO materi(bimbel_id, kelas_id, judul, keterangan, date, file_location) VALUES ('$KelasBimbel','$Kelas','$Judul','$Keterangan','$tanggal','$File')";
-$tambahdata = mysqli_query($sql, $koneksi) or die('Could not look up user information; ' . mysqli_error($koneksi));;
-if(! $tambahdata )
-{
-  die('Gagal Tambah Data');
-}
-echo "Berhasil tambah data\n";
-mysql_close($koneksi);
-echo $tanggal." ".$Judul." ".$Keterangan." ".$Kelas;
-*/
-/*
-$target_file = $directory . basename($_FILES["file"]["name"]);
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 ?>

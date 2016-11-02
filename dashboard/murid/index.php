@@ -138,7 +138,7 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Tanggal Lahir:</label>
-							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
 							<input type="date" name="tgl_lahir" class="form-control" placeholder="Masukan Tanggal Lahir" required>
 							</div>						
 						</div>
@@ -248,7 +248,7 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Tanggal Lahir:</label>
-							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
 							<input id="tgl_lahir" type="date" name="tgl_lahir" class="form-control" placeholder="Masukan Tanggal Lahir" required>
 							</div>						
 						</div>

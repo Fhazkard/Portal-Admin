@@ -26,6 +26,7 @@ if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
 	$selek_data = mysqli_query($koneksi, "SELECT * FROM admin WHERE username='".$nama."' AND password='".$pass."'");
 	if($selek_data){		
 		$_SESSION['limit'] = time() + 1800;
+		$_SESSION['admin'] = $nama;
 		echo "<script>alert('Anda Berhasil Login!')
 		window.location = '../dashboard/'</script>";
 	}else{

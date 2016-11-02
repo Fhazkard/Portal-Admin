@@ -190,7 +190,8 @@ if(isset($_REQUEST['module'])){
 			$nama = mysqli_real_escape_string($koneksi, $nama);
 			$bimbel_id = mysqli_real_escape_string($koneksi, $bimbel_id);
 			$kelas_id = mysqli_real_escape_string($koneksi, $kelas_id);
-			$sekolah_id = mysqli_real_escape_string($koneksi, $sekolah_id);			
+			$sekolah_id = mysqli_real_escape_string($koneksi, $sekolah_id);	
+			$tgl_lahir = mysqli_real_escape_string($koneksi, $tgl_lahir);			
 			$jk = mysqli_real_escape_string($koneksi, $jk);
 			$ortu = mysqli_real_escape_string($koneksi, $ortu);
 			$alamat = mysqli_real_escape_string($koneksi, $alamat);

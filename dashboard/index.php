@@ -52,7 +52,7 @@ if(isset($_SESSION['limit']))
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>Fhazkard</h2>
+              <h2><?php echo $_SESSION['admin'];?></h2>
             </div>
           </div>
           <!-- /menu prile quick info -->
@@ -79,12 +79,6 @@ if(isset($_SESSION['limit']))
                     </li>
                   </ul>
                 </li>
-<!--                <li><a><i class="fa fa-desktop"></i> Akademik <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="../akademik-bimbel/">Data Kelas Bimbel</a>
-                    </li>
-                  </ul>
-                </li>                -->
                 <li><a><i class="fa fa-bar-chart-o"></i> Materi Belajar <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                       <li><a href="../dashboard/materi/">Data Materi Belajar</a>
@@ -109,11 +103,11 @@ if(isset($_SESSION['limit']))
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="../content/img/user.jpg" alt="">Fhazkard
+                  <img src="../content/img/user.jpg" alt=""><?php echo $_SESSION['admin'];?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                  <li><a href="javascript:;">  Ganti Password</a>
+                  <li><a data-toggle="modal" data-target=".edit">  Ganti Password</a>
                   </li>
                   <li>
                       <form action="../koneksi/logout.php" method="post" style="width: auto;">                      
@@ -122,7 +116,40 @@ if(isset($_SESSION['limit']))
                       </form>
                   </li>
                 </ul>
-              </li>            
+              </li>
+				<div class="animated bounceInUp modal fade edit" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span>
+                        </button>
+                        <h4 class="modal-title" id="">Ganti Password Administrator</h4>
+                      </div>
+                      <div class="modal-body">
+						<form method="POST" action="../../koneksi/edit.php" class="form-horizontal form-label-left">
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Password Baru:</label>
+							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<input type="password" name="password" class="form-control" placeholder="Masukan Password Baru" required autofocus>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Password Konfirmasi:</label>
+							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
+							<input type="password" name="confirm" class="form-control" placeholder="Masukan Password Sama" required autofocus>
+							</div>						
+						</div>
+						<?php print CSRF::tokenInput(); ?>
+                      </div>
+						<div class="modal-footer">
+						<input id="module" type="hidden" name="module" value="admin"> 
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin:0px;">Keluar</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+						</div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
             </ul>
           </nav>
         </div><!-- nav menu -->
@@ -256,7 +283,7 @@ if(isset($_SESSION['limit']))
 	<script src="../content/js/jquery.nicescroll.min.js" type="text/javascript"></script>
 	<script src="../content/js/echarts-all.js" type="text/javascript"></script>
 	<script src="../content/js/theme-echart.js" type="text/javascript"></script>
-        <script type="text/javascript">
+    <script type="text/javascript">
     var myChart9 = echarts.init(document.getElementById('mainb'), theme);
     myChart9.setOption({
       title: {

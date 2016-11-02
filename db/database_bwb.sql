@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2016 at 10:46 AM
+-- Generation Time: Nov 02, 2016 at 06:53 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -58,7 +58,8 @@ CREATE TABLE `bimbel` (
 
 INSERT INTO `bimbel` (`bimbel_id`, `pengajar_id`, `nama`) VALUES
 (2, 3, 'Bahasa Mandarin'),
-(3, 2, 'Matematika');
+(3, 2, 'Matematika'),
+(4, 3, 'Bahasa Inggris');
 
 -- --------------------------------------------------------
 
@@ -114,14 +115,22 @@ CREATE TABLE `login` (
 
 CREATE TABLE `materi` (
   `materi_id` int(11) NOT NULL,
-  `bimbel_id` int(11) DEFAULT NULL,
-  `kelas_id` int(11) DEFAULT NULL,
   `sekolah_id` int(11) DEFAULT NULL,
+  `kelas_id` int(11) DEFAULT NULL,
+  `bimbel_id` int(11) DEFAULT NULL,
   `judul` varchar(25) NOT NULL,
   `keterangan` text NOT NULL,
-  `date` date NOT NULL,
+  `tgl_terbit` date NOT NULL,
   `file_location` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `materi`
+--
+
+INSERT INTO `materi` (`materi_id`, `sekolah_id`, `kelas_id`, `bimbel_id`, `judul`, `keterangan`, `tgl_terbit`, `file_location`) VALUES
+(1, 1, 3, 2, 'Dasar Matematika', 'Materi untuk Playgroup', '2016-10-03', 'test'),
+(2, 1, 3, 2, 'Materi Dasar Bimbel', 'Untuk Pengajar', '2016-10-03', 'Test');
 
 -- --------------------------------------------------------
 
@@ -147,8 +156,8 @@ CREATE TABLE `murid` (
 --
 
 INSERT INTO `murid` (`murid_id`, `sekolah_id`, `kelas_id`, `bimbel_id`, `nama`, `tgl_lahir`, `jk`, `alamat`, `nama_ortu`, `tlp`) VALUES
-(1, 2, 14, 2, 'Doni', '1995-08-02', 'Laki-laki', 'Baloi', 'Larasati', '0812 4430 5530'),
-(2, 1, 10, 3, 'Lia', '1997-11-01', 'Perempuan', 'Jodoh', 'Hendra', '0812 2210 4210');
+(5, 2, 4, 3, 'Dian Wahyudi', '1997-10-19', 'Laki-laki', 'Tiban 1', 'Ibu Ratna', '0812 6630 0555'),
+(6, 1, 3, 2, 'Yudi', '1998-10-02', 'Laki-laki', 'Sekupang', 'Hasan', '0867 3213 1213');
 
 -- --------------------------------------------------------
 
@@ -248,19 +257,18 @@ ALTER TABLE `login`
 --
 ALTER TABLE `materi`
   ADD PRIMARY KEY (`materi_id`),
-  ADD UNIQUE KEY `bimbel_id` (`bimbel_id`),
+  ADD KEY `sekolah_id` (`sekolah_id`),
   ADD KEY `kelas_id` (`kelas_id`),
-  ADD KEY `sekolah_id` (`sekolah_id`);
+  ADD KEY `bimbel_id` (`bimbel_id`);
 
 --
 -- Indexes for table `murid`
 --
 ALTER TABLE `murid`
   ADD PRIMARY KEY (`murid_id`),
-  ADD UNIQUE KEY `nama` (`nama`),
-  ADD UNIQUE KEY `kelas_id` (`kelas_id`),
-  ADD UNIQUE KEY `bimbel_id` (`bimbel_id`),
-  ADD UNIQUE KEY `sekolah_id` (`sekolah_id`);
+  ADD KEY `sekolah_id` (`sekolah_id`),
+  ADD KEY `kelas_id` (`kelas_id`),
+  ADD KEY `bimbel_id` (`bimbel_id`);
 
 --
 -- Indexes for table `naik_kelas`
@@ -296,7 +304,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bimbel`
 --
 ALTER TABLE `bimbel`
-  MODIFY `bimbel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `bimbel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `kelas`
 --
@@ -311,12 +319,12 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `materi`
 --
 ALTER TABLE `materi`
-  MODIFY `materi_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `materi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `murid`
 --
 ALTER TABLE `murid`
-  MODIFY `murid_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `murid_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `naik_kelas`
 --
@@ -352,9 +360,9 @@ ALTER TABLE `login`
 -- Constraints for table `materi`
 --
 ALTER TABLE `materi`
-  ADD CONSTRAINT `fg-bimbel-id` FOREIGN KEY (`bimbel_id`) REFERENCES `bimbel` (`bimbel_id`),
-  ADD CONSTRAINT `fg-kelas-id` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`kelas_id`),
-  ADD CONSTRAINT `fg-sekolah-id` FOREIGN KEY (`sekolah_id`) REFERENCES `sekolah` (`sekolah_id`);
+  ADD CONSTRAINT `fg-sekolah_id` FOREIGN KEY (`sekolah_id`) REFERENCES `sekolah` (`sekolah_id`),
+  ADD CONSTRAINT `fg_bimbel_id` FOREIGN KEY (`bimbel_id`) REFERENCES `bimbel` (`bimbel_id`),
+  ADD CONSTRAINT `fg_kelas_id` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`kelas_id`);
 
 --
 -- Constraints for table `murid`
@@ -362,7 +370,7 @@ ALTER TABLE `materi`
 ALTER TABLE `murid`
   ADD CONSTRAINT `fg-bimbel_id` FOREIGN KEY (`bimbel_id`) REFERENCES `bimbel` (`bimbel_id`),
   ADD CONSTRAINT `fg-kelas_id` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`kelas_id`),
-  ADD CONSTRAINT `fg-sekolah_id` FOREIGN KEY (`sekolah_id`) REFERENCES `sekolah` (`sekolah_id`);
+  ADD CONSTRAINT `fg_sekolah_id` FOREIGN KEY (`sekolah_id`) REFERENCES `sekolah` (`sekolah_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 require 'konek.php';
 require 'csrf.php';
 require 'script.php';
@@ -166,6 +166,59 @@ If(isset($_REQUEST['module'])){
 		}else{
 		die("<script>alert('Error Load Page!') 
 		window.location = '../'</script>");
+		}
+	}else if($module == 'murid'){
+		if(isset($_REQUEST['nama']) && isset($_REQUEST['tgl_lahir']) && isset($_REQUEST['ortu']) && isset($_REQUEST['alamat']) && isset($_REQUEST['tlp'])&& isset($_REQUEST['murid_id'])){
+			if(!CSRF::validatePost()) {
+				die("<script>alert('Restricted URL !') 
+				window.location = '../'</script>");
+				session_destroy();
+			}
+			$limit = $_SESSION['limit'];
+			if (time() < $limit){		
+				}else{
+				die("<script>alert('Silahkan Login Ulang!') 
+				window.location = '../'</script>");
+				unset($_SESSION['limit']);
+				session_destroy();
+			}
+			$murid_id = $_REQUEST['murid_id'];
+			$nama = $_REQUEST['nama'];
+			$bimbel_id = $_REQUEST['bimbel_id'];
+			$kelas_id = $_REQUEST['kelas_id'];
+			$sekolah_id = $_REQUEST['sekolah_id'];
+			$tgl_lahir = $_REQUEST['tgl_lahir'];
+			$jk = $_REQUEST['jk'];
+			$ortu = $_REQUEST['ortu'];
+			$alamat = $_REQUEST['alamat'];
+			$tlp = $_REQUEST['tlp'];
+			if(!empty($nama) || !empty($tgl_lahir) || !empty($ortu) || !empty($alamat)||!empty($tlp)){	
+			}else{
+				die("<script>alert('Anda Harus Mengisi Semua Form!')
+				window.location = '../dashboard/".$module."/'</script>");
+			}
+			$murid_id = mysqli_real_escape_string($koneksi, $murid_id);
+			$nama = mysqli_real_escape_string($koneksi, $nama);
+			$bimbel_id = mysqli_real_escape_string($koneksi, $bimbel_id);
+			$kelas_id = mysqli_real_escape_string($koneksi, $kelas_id);
+			$sekolah_id = mysqli_real_escape_string($koneksi, $sekolah_id);
+			$tgl_lahir = mysqli_real_escape_string($koneksi, $tgl_lahir);
+			$jk = mysqli_real_escape_string($koneksi, $jk);
+			$ortu = mysqli_real_escape_string($koneksi, $ortu);
+			$alamat = mysqli_real_escape_string($koneksi, $alamat);
+			$tlp = mysqli_real_escape_string($koneksi, $tlp);			
+			$update_data = mysqli_query($koneksi, "UPDATE ".$module." SET sekolah_id='".$sekolah_id."', kelas_id='".$kelas_id."', bimbel_id='".$bimbel_id."', nama='".$nama."', 
+													tgl_lahir='".$tgl_lahir."' , jk='".$jk."' , alamat='".$alamat."' , nama_ortu='".$ortu."' , tlp='".$tlp."' WHERE ".$module."_id='".$murid_id."'");	
+			if($update_data){
+				echo "<script>alert('Data Telah di Simpan!') 
+				window.location = '../dashboard/".$module."/'</script>"; 
+			}else{
+				echo "<script>alert('Data Gagal di Simpan!') 
+				window.location = '../dashboard/".$module."/'</script>"; 
+			}
+		}else{
+			die("<script>alert('Error Load Page!') 
+			window.location = '../'</script>");
 		}
 	}else{
 		echo "<script>alert('Module Tidak Ada Yang Tepat!')

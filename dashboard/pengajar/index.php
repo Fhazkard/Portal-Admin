@@ -82,7 +82,7 @@
 							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
 							<select name="jk" class="form-control">
 								<option value="Laki-laki">Laki-laki</option>
-								<option value="perempuan">perempuan</option>
+								<option value="Perempuan">Perempuan</option>
 							</select>
 							</div>						
 						</div>
@@ -138,7 +138,7 @@
 							<div class="col-md-5 col-sm-5 col-xs-12"  style="padding-left:0px;padding-right:0px;">
 							<select id="jk" name="jk" class="form-control">
 								<option value="Laki-laki">Laki-laki</option>
-								<option value="perempuan">perempuan</option>
+								<option value="Perempuan">Perempuan</option>
 							</select>
 							</div>						
 						</div>

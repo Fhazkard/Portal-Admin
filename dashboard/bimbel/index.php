@@ -20,12 +20,8 @@
 					<?php
 						include '../../koneksi/konek.php';
 
-						$selek_data = mysqli_query($koneksi, "SELECT murid.murid_id,murid.sekolah_id,murid.kelas_id,murid.bimbel_id,murid.nama, 
-								murid.tgl_lahir, murid.jk, murid.alamat, murid.nama_ortu, murid.tlp,
-								sekolah.nama AS sekolah, kelas.nama AS kelas, bimbel.nama AS bimbel FROM murid 
-								JOIN sekolah ON sekolah.sekolah_id = murid.sekolah_id
-								JOIN kelas ON kelas.kelas_id =  murid.kelas_id
-								JOIN bimbel ON bimbel.bimbel_id = murid.bimbel_id");
+						$selek_data = mysqli_query($koneksi, "SELECT bimbel.bimbel_id,bimbel.pengajar_id,bimbel.nama,pengajar.nama AS pengajar 
+															FROM `bimbel` JOIN pengajar ON pengajar.pengajar_id = bimbel.pengajar_id");
 						while($data = mysqli_fetch_array($selek_data)){
 							?>                  
                       <tr class=" ">

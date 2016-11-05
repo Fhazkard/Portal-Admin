@@ -22,17 +22,39 @@ if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
 	}
 	$nama = mysqli_real_escape_string($koneksi, $nama);
 	$pass = mysqli_real_escape_string($koneksi, $pass);
-    $pass = crypt($pass);
-	$selek_data = mysqli_query($koneksi, "SELECT * FROM admin WHERE username='".$nama."' AND password='".$pass."'");
-	if($selek_data){		
-		$_SESSION['limit'] = time() + 1800;
-		$_SESSION['admin'] = $nama;
-		echo "<script>alert('Anda Berhasil Login!')
-		window.location = '../dashboard/'</script>";
+    $pass = md5($pass);
+	$batas = 0;
+	if($nama == 'administrator'){
+		$selek_data = mysqli_query($koneksi, "SELECT * FROM admin WHERE user_name='".$nama."' AND pass='".$pass."'");		
+		while($data = mysqli_fetch_array($selek_data)){
+			$batas ++;
+		}	
+			if($batas == 1){		
+				$_SESSION['limit'] = time() + 1800;
+				$_SESSION['admin'] = $nama;
+				echo "<script>alert('Anda Berhasil Login!')
+				window.location = '../dashboard/'</script>";
+			}else{
+				echo "<script>alert('Anda Gagal Login!')
+				window.location = '../'</script>";
+			}
 	}else{
-		echo "<script>alert('Anda Gagal Login!')
-		window.location = '../'</script>";
-    }
+		$selek_data = mysqli_query($koneksi, "SELECT * FROM login WHERE user_name='".$nama."' AND pass='".$pass."'");
+		while($data = mysqli_fetch_array($selek_data)){
+			$batas ++;
+			$id = $data['murid_id'];
+		}	
+			if($batas == 1){		
+				$_SESSION['waktu'] = time() + 1800;
+				$_SESSION['login'] = $nama;
+				$_SESSION['murid_id'] = $id;
+				echo "<script>alert('Anda Berhasil Login!')
+				window.location = '../dashboard/login'</script>";
+			}else{
+				echo "<script>alert('Anda Gagal Login!')
+				window.location = '../'</script>";
+			}	
+	} 
 }else{
 	die("<script>alert('Error Load Page!') 
 	window.location = '../'</script>");

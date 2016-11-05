@@ -22,8 +22,12 @@ CSRF::init();
 		$module = $_REQUEST['module'];
 		$id = $_REQUEST['delete_id'];
 		$delete_data = mysqli_query($koneksi, "DELETE FROM ".$module." WHERE ".$module."_id='".$id."'");
-		if($delete_data){	
-			echo "<script>alert('Data Berhasil di hapus!') 
+		if($delete_data){
+			if($module == 'materi'){
+				$oldfile = $_REQUEST['file_location'];
+				unlink($oldfile);
+			}
+			echo "<script>alert('Data Berhasil di Hapus!') 
 			window.location = '../dashboard/".$module."'</script>"; 
 		}else{
 			echo "<script>alert('Data Gagal di hapus!') 

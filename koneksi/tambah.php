@@ -198,7 +198,87 @@ if(isset($_REQUEST['module'])){
 			$tlp = mysqli_real_escape_string($koneksi, $tlp);			
 			$insert_data = mysqli_query($koneksi, "INSERT INTO  ".$module." (sekolah_id,kelas_id,bimbel_id,nama,tgl_lahir,jk,alamat,nama_ortu,tlp) VALUES ('".$sekolah_id."','".$kelas_id."','".$bimbel_id."','".$nama."','".$tgl_lahir."','".$jk."','".$alamat."', '".$ortu."','".$tlp."')");
 			if($insert_data){
-				echo "<script>alert('Data Berhasil Di Tambah!')
+				$select_data = mysqli_query($koneksi, "SELECT * FROM murid ORDER BY murid_id DESC LIMIT 1");				
+				while($data = mysqli_fetch_array($select_data)){
+					$murid_id = $data['murid_id'];
+				}
+				$nama = explode(' ',$nama);
+				$murid_id = $murid_id;
+				$user_name = $murid_id.''.$sekolah_id.''.$kelas_id.''.$bimbel_id.'_'.$nama[0];
+				$pass = md5('123456');
+				$buat_account = mysqli_query($koneksi, "INSERT INTO login (murid_id,user_name,pass) VALUES ('".$murid_id."','".$user_name."','".$pass."')");
+				if(!$buat_account){
+					echo "<script>alert('Account User Gagal di Buat!')
+					window.location = '../dashboard/".$module."/'</script>";
+				}
+				echo "<script>alert('Data Murid Berhasil Di Tambah!\\nDengan Login \\nUSERNAME: ".$user_name."\\nPASSWORD: 123456')
+				window.location = '../dashboard/".$module."/'</script>";			
+			}else{
+				echo "<script>alert('Data Gagal Di Tambah!')
+				window.location = '../dashboard/".$module."/'</script>";
+			}
+		}else{
+			die("<script>alert('Error Load Page!') 
+			window.location = '../'</script>");
+		}
+	}else if($module == 'materi'){
+		if(isset($_REQUEST['judul']) && isset($_REQUEST['keterangan']) && isset($_FILES['data_upload'])){
+			if(!CSRF::validatePost()) {
+				die("<script>alert('Restricted URL !') 
+				window.location = '../'</script>");
+				session_destroy();
+			}
+			$limit = $_SESSION['limit'];
+			if (time() < $limit){		
+				}else{
+				die("<script>alert('Silahkan Login Ulang!') 
+				window.location = '../'</script>");
+				unset($_SESSION['limit']);
+				session_destroy();
+			}
+			$DirectoryFull= getcwd();
+			$DirectoryFull= $DirectoryFull.'/uploads';
+			$file_name	= $_FILES["data_upload"]["name"];
+			$judul = $_REQUEST["judul"];
+			$bimbel_id = $_REQUEST["bimbel_id"];
+			$kelas_id = $_REQUEST["kelas_id"];
+			$sekolah_id = $_REQUEST["sekolah_id"];
+			$keterangan = $_REQUEST["keterangan"];
+			$tgl_terbit = date('Y-m-d');
+			$DirectoryFull =  $DirectoryFull.'/'.$judul;
+			if(!empty($judul) || !empty($keterangan) || !empty($data_upload)){	
+			}else{
+				die("<script>alert('Anda Harus Mengisi Semua Form!')
+				window.location = '../dashboard/".$module."/'</script>");
+			}
+			if(!file_exists($DirectoryFull)){
+				mkdir($DirectoryFull,0777,true);
+				$DirectoryFull = $DirectoryFull.'/'.$file_name;
+				if(!file_exists($DirectoryFull)){
+					move_uploaded_file($_FILES["data_upload"]["tmp_name"],$DirectoryFull);
+				}else{
+					die("<script>alert('Upload Data Materi Gagal! Ada Nama File Yang Sama!')
+					window.location = '../dashboard/".$module."/'</script>");
+				}
+			}else{
+				$DirectoryFull = $DirectoryFull.'/'.$file_name;
+				if(!file_exists($DirectoryFull)){
+					move_uploaded_file($_FILES["data_upload"]["tmp_name"],$DirectoryFull);
+				}else{
+					die("<script>alert('Upload Data Materi Gagal! Ada Nama File Yang Sama!')
+					window.location = '../dashboard/".$module."/'</script>");
+				}
+			}			
+			$judul = mysqli_real_escape_string($koneksi, $judul);
+			$bimbel_id = mysqli_real_escape_string($koneksi, $bimbel_id);
+			$kelas_id = mysqli_real_escape_string($koneksi, $kelas_id);
+			$sekolah_id = mysqli_real_escape_string($koneksi, $sekolah_id);	
+			$keterangan = mysqli_real_escape_string($koneksi, $keterangan);			
+			$tgl_terbit = mysqli_real_escape_string($koneksi, $tgl_terbit);
+			$DirectoryFull = mysqli_real_escape_string($koneksi, $DirectoryFull);		
+			$insert_data = mysqli_query($koneksi, "INSERT INTO  ".$module." (sekolah_id,kelas_id,bimbel_id,judul,keterangan,tgl_terbit,file_location) VALUES ('".$sekolah_id."','".$kelas_id."','".$bimbel_id."','".$judul."','".$keterangan."','".$tgl_terbit."','".$DirectoryFull."')");
+			if($insert_data){
+				echo "<script>alert('Data Berhasil Di Tambah dan Di Upload!')
 				window.location = '../dashboard/".$module."/'</script>";	
 			}else{
 				echo "<script>alert('Data Gagal Di Tambah!')

@@ -55,7 +55,7 @@ if(isset($_SESSION['limit']))
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>Fhazkard</h2>
+              <h2><?php echo $_SESSION['admin'];?></h2>
             </div>
           </div>
           <!-- /menu prile quick info -->
@@ -112,8 +112,7 @@ if(isset($_SESSION['limit']))
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="../../content/img/user.jpg" alt="">Fhazkard
-                  <span class=" fa fa-angle-down"></span>
+                  <img src="../../content/img/user.jpg" alt=""><?php echo $_SESSION['admin'];?> <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                   <li><a href="javascript:;">  Ganti Password</a>

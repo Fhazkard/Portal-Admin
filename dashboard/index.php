@@ -103,8 +103,7 @@ if(isset($_SESSION['limit']))
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="../content/img/user.jpg" alt=""><?php echo $_SESSION['admin'];?>
-                  <span class=" fa fa-angle-down"></span>
+                  <img src="../content/img/user.jpg" alt=""><?php echo $_SESSION['admin'];?> <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                   <li><a data-toggle="modal" data-target=".edit">  Ganti Password</a>
@@ -126,17 +125,18 @@ if(isset($_SESSION['limit']))
                         <h4 class="modal-title" id="">Ganti Password Administrator</h4>
                       </div>
                       <div class="modal-body">
-						<form method="POST" action="../../koneksi/edit.php" class="form-horizontal form-label-left">
+						<form method="POST" action="../koneksi/edit.php" class="form-horizontal form-label-left">
+						<input type="hidden" name="nama" value="<?php echo $_SESSION['admin'];?>">
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Password Baru:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
-							<input type="password" name="password" class="form-control" placeholder="Masukan Password Baru" required autofocus>
+							<input type="password" name="password" class="form-control" placeholder="Masukan Password Baru" required maxlength="8" minlength="6" autofocus>
 							</div>						
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px;text-align:left;">Password Konfirmasi:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12"  style="padding-left:0px;padding-right:0px;">
-							<input type="password" name="confirm" class="form-control" placeholder="Masukan Password Sama" required autofocus>
+							<input type="password" name="konfirm" class="form-control" placeholder="Masukan Password Sama" required maxlength="8" minlength="6">
 							</div>						
 						</div>
 						<?php print CSRF::tokenInput(); ?>

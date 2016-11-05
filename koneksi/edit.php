@@ -220,6 +220,162 @@ If(isset($_REQUEST['module'])){
 			die("<script>alert('Error Load Page!') 
 			window.location = '../'</script>");
 		}
+	}else if($module == 'materi'){
+		if(isset($_REQUEST['keterangan']) && isset($_FILES['data_upload']) && isset($_REQUEST['materi_id']) && isset($_REQUEST['file_location'])){
+			if(!CSRF::validatePost()) {
+				die("<script>alert('Restricted URL !') 
+				window.location = '../'</script>");
+				session_destroy();
+			}
+			$limit = $_SESSION['limit'];
+			if (time() < $limit){		
+				}else{
+				die("<script>alert('Silahkan Login Ulang!') 
+				window.location = '../'</script>");
+				unset($_SESSION['limit']);
+				session_destroy();
+			}			
+			$DirectoryFull= getcwd();
+			$DirectoryFull= $DirectoryFull.'/uploads';
+			$file_name	= $_FILES["data_upload"]["name"];
+			$OldFile = $_REQUEST["file_location"];			
+			$materi_id = $_REQUEST['materi_id'];
+			$judul = $_REQUEST['judul'];
+			$kelas_id = $_REQUEST["kelas_id"];
+			$sekolah_id = $_REQUEST["sekolah_id"];
+			$keterangan = $_REQUEST["keterangan"];
+			$DirectoryFull =  $DirectoryFull.'/'.$judul;			
+			if(!empty($judul) || !empty($keterangan) || !empty($data_upload)){	
+			}else{
+				die("<script>alert('Anda Harus Mengisi Semua Form!')
+				window.location = '../dashboard/".$module."/'</script>");
+			}
+			if(!file_exists($DirectoryFull)){
+				mkdir($DirectoryFull,0777,true);
+				$DirectoryFull = $DirectoryFull.'/'.$file_name;
+				if(!file_exists($DirectoryFull)){
+					unlink($OldFile);
+					move_uploaded_file($_FILES["data_upload"]["tmp_name"],$DirectoryFull);
+				}else{
+					die("<script>alert('Edit File Materi Gagal! Ada Nama File Yang Sama!')
+					window.location = '../dashboard/".$module."/'</script>");
+				}
+			}else{
+				$DirectoryFull = $DirectoryFull.'/'.$file_name;
+				if(!file_exists($DirectoryFull)){
+					unlink($OldFile);
+					move_uploaded_file($_FILES["data_upload"]["tmp_name"],$DirectoryFull);
+				}else{
+					die("<script>alert('Edit File Materi Gagal! Ada Nama File Yang Sama!')
+					window.location = '../dashboard/".$module."/'</script>");
+				}
+			}
+			$materi_id = mysqli_real_escape_string($koneksi, $materi_id);			
+			$kelas_id = mysqli_real_escape_string($koneksi, $kelas_id);
+			$sekolah_id = mysqli_real_escape_string($koneksi, $sekolah_id);	
+			$keterangan = mysqli_real_escape_string($koneksi, $keterangan);			
+			$DirectoryFull = mysqli_real_escape_string($koneksi, $DirectoryFull);	
+			
+			$update_data = mysqli_query($koneksi, "UPDATE ".$module." SET sekolah_id='".$sekolah_id."', kelas_id='".$kelas_id."', keterangan='".$keterangan."' , file_location='".$DirectoryFull."' WHERE ".$module."_id='".$materi_id."'");	
+			if($update_data){
+				echo "<script>alert('Data Telah di Simpan dan File Sudah Terganti!') 
+				window.location = '../dashboard/".$module."/'</script>"; 
+			}else{
+				echo "<script>alert('Data Gagal di Simpan') 
+				window.location = '../dashboard/".$module."/'</script>"; 
+			}
+		}else{
+			die("<script>alert('Error Load Page!') 
+			window.location = '../'</script>");
+		}
+	}else if($module == 'admin'){
+		if(isset($_REQUEST['password']) && isset($_REQUEST['konfirm']) && isset($_REQUEST['nama'])){
+			if(!CSRF::validatePost()) {
+				die("<script>alert('Restricted URL!') 
+				window.location = '../'</script>");
+				session_destroy();
+			}
+			$limit = $_SESSION['limit'];
+			if(time() < $limit){		
+				}else{
+				die("<script>alert('Silahkan Login Ulang!') 
+				window.location = '../'</script>");
+				unset($_SESSION['limit']);
+				session_destroy();
+			}
+			$nama =  $_REQUEST['nama'];
+			$password = $_REQUEST['password'];
+			$konfirm = $_REQUEST['konfirm'];
+			if(!empty($password) || !empty($konfirm)){	
+			}else{
+				die("<script>alert('Anda Harus Mengisi Semua Form!')
+				window.location = '../dashboard/'</script>");
+			}
+			if($password == $konfirm){	
+			}else{
+				die("<script>alert('Password Dengan Password Konfirmasi Tidak Sama!')
+				window.location = '../dashboard/'</script>");
+			}			
+			$nama = mysqli_real_escape_string($koneksi, $nama);
+			$password = mysqli_real_escape_string($koneksi, $password);
+			$password = md5($password);
+			$update_data = mysqli_query($koneksi, "UPDATE ".$module." SET pass='".$password."' WHERE user_name='".$nama."'");	
+			if($update_data){
+				echo "<script>alert('Password Telah Berhasil di Ganti!') 
+				window.location = '../'</script>";
+				session_destroy();
+			}else{
+				echo "<script>alert('Password Gagal di Ganti!') 
+				window.location = '../dashboard/'</script>"; 
+			}
+		}else{
+		die("<script>alert('Error Load Page!') 
+		window.location = '../'</script>");
+		}
+	}else if($module == 'login'){
+		if(isset($_REQUEST['password']) && isset($_REQUEST['konfirm']) && isset($_REQUEST['nama'])){
+			if(!CSRF::validatePost()) {
+				die("<script>alert('Restricted URL!') 
+				window.location = '../'</script>");
+				session_destroy();
+			}
+			$limit = $_SESSION['waktu'];
+			if(time() < $limit){		
+				}else{
+				die("<script>alert('Silahkan Login Ulang!') 
+				window.location = '../'</script>");
+				unset($_SESSION['waktu']);
+				session_destroy();
+			}
+			$nama =  $_REQUEST['nama'];
+			$password = $_REQUEST['password'];
+			$konfirm = $_REQUEST['konfirm'];
+			if(!empty($password) || !empty($konfirm)){	
+			}else{
+				die("<script>alert('Anda Harus Mengisi Semua Form!')
+				window.location = '../dashboard/login'</script>");
+			}
+			if($password == $konfirm){	
+			}else{
+				die("<script>alert('Password Dengan Password Konfirmasi Tidak Sama!')
+				window.location = '../dashboard/login'</script>");
+			}			
+			$nama = mysqli_real_escape_string($koneksi, $nama);
+			$password = mysqli_real_escape_string($koneksi, $password);
+			$password = md5($password);
+			$update_data = mysqli_query($koneksi, "UPDATE ".$module." SET pass='".$password."' WHERE user_name='".$nama."'");	
+			if($update_data){
+				echo "<script>alert('Password Telah Berhasil di Ganti!') 
+				window.location = '../'</script>";
+				session_destroy();
+			}else{
+				echo "<script>alert('Password Gagal di Ganti!') 
+				window.location = '../dashboard/login'</script>"; 
+			}
+		}else{
+		die("<script>alert('Error Load Page!') 
+		window.location = '../'</script>");
+		}
 	}else{
 		echo "<script>alert('Module Tidak Ada Yang Tepat!')
 			window.location = '../dashboard/".$module."/'</script>";

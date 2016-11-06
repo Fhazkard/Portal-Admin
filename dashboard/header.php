@@ -82,15 +82,15 @@ if(isset($_SESSION['limit']))
                     </li>
                   </ul>
                 </li>
-<!--                <li><a><i class="fa fa-desktop"></i> Akademik <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="../akademik-bimbel/">Data Kelas Bimbel</a>
-                    </li>
-                  </ul>
-                </li>                -->
                 <li><a><i class="fa fa-bar-chart-o"></i> Materi Belajar <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                       <li><a href="../materi/">Data Materi Belajar</a>
+                    </li>
+                  </ul>
+                </li>
+				<li><a><i class="fa fa-user"></i> User Management <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                      <li><a href="../user/">Data Akun User</a>
                     </li>
                   </ul>
                 </li>

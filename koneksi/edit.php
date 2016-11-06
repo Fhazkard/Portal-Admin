@@ -353,12 +353,12 @@ If(isset($_REQUEST['module'])){
 			if(!empty($password) || !empty($konfirm)){	
 			}else{
 				die("<script>alert('Anda Harus Mengisi Semua Form!')
-				window.location = '../dashboard/login'</script>");
+				window.location = '../dashboard/".$module."'</script>");
 			}
 			if($password == $konfirm){	
 			}else{
 				die("<script>alert('Password Dengan Password Konfirmasi Tidak Sama!')
-				window.location = '../dashboard/login'</script>");
+				window.location = '../dashboard/".$module."'</script>");
 			}			
 			$nama = mysqli_real_escape_string($koneksi, $nama);
 			$password = mysqli_real_escape_string($koneksi, $password);
@@ -366,11 +366,54 @@ If(isset($_REQUEST['module'])){
 			$update_data = mysqli_query($koneksi, "UPDATE ".$module." SET pass='".$password."' WHERE user_name='".$nama."'");	
 			if($update_data){
 				echo "<script>alert('Password Telah Berhasil di Ganti!') 
-				window.location = '../'</script>";
+				window.location = '../".$module."'</script>";
 				session_destroy();
 			}else{
 				echo "<script>alert('Password Gagal di Ganti!') 
-				window.location = '../dashboard/login'</script>"; 
+				window.location = '../dashboard/".$module."'</script>"; 
+			}
+		}else{
+		die("<script>alert('Error Load Page!') 
+		window.location = '../'</script>");
+		}
+	}else if($module == 'user'){
+		if(isset($_REQUEST['password']) && isset($_REQUEST['konfirm']) && isset($_REQUEST['login_id'])){
+			if(!CSRF::validatePost()) {
+				die("<script>alert('Restricted URL!') 
+				window.location = '../'</script>");
+				session_destroy();
+			}
+			$limit = $_SESSION['limit'];
+			if(time() < $limit){		
+				}else{
+				die("<script>alert('Silahkan Login Ulang!') 
+				window.location = '../'</script>");
+				unset($_SESSION['limit']);
+				session_destroy();
+			}
+			$login_id =  $_REQUEST['login_id'];
+			$password = $_REQUEST['password'];
+			$konfirm = $_REQUEST['konfirm'];
+			if(!empty($password) || !empty($konfirm)){	
+			}else{
+				die("<script>alert('Anda Harus Mengisi Semua Form!')
+				window.location = '../dashboard/".$module."'</script>");
+			}
+			if($password == $konfirm){	
+			}else{
+				die("<script>alert('Password Dengan Password Konfirmasi Tidak Sama!')
+				window.location = '../dashboard/".$module."'</script>");
+			}			
+			$login_id = mysqli_real_escape_string($koneksi, $login_id);
+			$password = mysqli_real_escape_string($koneksi, $password);
+			$password = md5($password);
+			$update_data = mysqli_query($koneksi, "UPDATE login SET pass='".$password."' WHERE login_id='".$login_id."'");	
+			if($update_data){
+				echo "<script>alert('Password Telah Berhasil di Ganti!') 
+				window.location = '../dashboard/".$module."'</script>";
+			}else{
+				echo "<script>alert('Password Gagal di Ganti!') 
+				window.location = '../dashboard/".$module."'</script>"; 
 			}
 		}else{
 		die("<script>alert('Error Load Page!') 

@@ -20,7 +20,7 @@
 						<th>Alamat</th>
 						<th>Orang Tua</th>
 						<th>Telepon</th>
-                        <th>Action</th>
+                        <th style="width:100px;">Action</th>
                       </tr>
                     </thead>
 					<tbody>

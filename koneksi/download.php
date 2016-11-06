@@ -14,7 +14,7 @@ if(isset($_REQUEST['link_download'])){
 	}
 	$link_download = $_REQUEST['link_download'];
 	$link_download = substr($link_download,37);
-	echo "<script>window.location ='".$link_download."'</script>"; 
+	die ("<script> window.location ='".$link_download."'; window.setTimeout(function(){window.location.href = '../dashboard/login'}, 2000);</script>");
 }else{
 	die("<script>alert('Error Load Page!') 
 	window.location = '../'</script>");

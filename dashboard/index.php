@@ -85,6 +85,12 @@ if(isset($_SESSION['limit']))
                     </li>
                   </ul>
                 </li>
+				<li><a><i class="fa fa-user"></i> User Management <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                      <li><a href="../dashboard/user/">Data Akun User</a>
+                    </li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
@@ -158,38 +164,24 @@ if(isset($_SESSION['limit']))
          
         <!-- Total Dashboard -->
        <div class="row tile_count">
+	   <?php
+			include '../koneksi/konek.php';
+			$selek_data = mysqli_query($koneksi, "SELECT COUNT(murid.bimbel_id) AS total_murid, bimbel.nama FROM `murid` 
+												JOIN bimbel ON bimbel.bimbel_id = murid.bimbel_id
+												GROUP BY murid.bimbel_id ORDER BY total_murid DESC");
+			while($data = mysqli_fetch_array($selek_data)){
+			?> 
           <div class="animated bounceInLeft col-md-3 col-sm-6 col-xs-6 tile_stats_count">
             <div class="left"></div>
             <div class="right">
               <span class="count_top"><i class="fa fa-user"></i> Total Murid</span>
-              <div class="count green">50</div>
-              <span class="count_bottom">Kelas Bahasa Mandarin</span>
+              <div class="count green"><?php echo $data['total_murid']?></div>
+              <span class="count_bottom"><?php echo $data['nama']?></span>
             </div>
           </div>
-          <div class="animated bounceInUp col-md-3 col-sm-6 col-xs-6 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Total Murid</span>
-              <div class="count green">45</div>
-              <span class="count_bottom">Kelas Bahasa Inggris</span>
-            </div>
-          </div>
-          <div class="animated bounceInDown col-md-3 col-sm-6 col-xs-6 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Total Murid</span>
-              <div class="count green">25</div>
-              <span class="count_bottom">Kelas Matematika</span>
-            </div>
-          </div>
-          <div class="animated bounceInRight col-md-3 col-sm-6 col-xs-6 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Total Murid</span>
-              <div class="count green">30</div>
-              <span class="count_bottom">Kelas Playgroup</span>
-            </div>
-          </div>
+         <?php
+		}
+		?>	
         </div><!-- Total Dashboard -->
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -208,57 +200,27 @@ if(isset($_SESSION['limit']))
                   <h2>Total Murid Per Sekolah</h2>
                   <div class="clearfix"></div>
                 </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-6">
+				<?php
+				include '../koneksi/konek.php';
+				$selek_data = mysqli_query($koneksi, "SELECT COUNT(murid.sekolah_id) AS total_sekolah, sekolah.nama FROM `murid` 
+												JOIN sekolah ON sekolah.sekolah_id = murid.sekolah_id
+												GROUP BY murid.sekolah_id ORDER BY total_sekolah DESC
+                                                LIMIT 5");
+				while($data = mysqli_fetch_array($selek_data)){
+				?> 
+				<div class="col-md-12 col-sm-12 col-xs-6">
                   <div>
-                    <p>Sekolah 1</p>
+                    <p><?php echo $data['nama']?></p>
                     <div class="">
                       <div class="progress progress_lg" style="width: 100%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"><strong>30</strong></div>
+                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<?php echo $data['total_sekolah']?>"><strong><?php echo $data['total_sekolah']?></strong></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-12 col-sm-12 col-xs-6">
-                  <div>
-                    <p>Sekolah 2</p>
-                    <div class="">
-                      <div class="progress progress_lg" style="width: 100%;">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="22"><strong>22</strong></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-6">
-                  <div>
-                    <p>Sekolah 3</p>
-                    <div class="">
-                      <div class="progress progress_lg" style="width: 100%;">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="18"><strong>18</strong></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-6">
-                  <div>
-                    <p>Sekolah 4</p>
-                    <div class="">
-                      <div class="progress progress_lg" style="width: 100%;">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="12"><strong>12</strong></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-6">
-                  <div>
-                    <p>Sekolah 5</p>
-                    <div class="">
-                      <div class="progress progress_lg" style="width: 100%;">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="8"><strong>8</strong></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <?php
+				}
+				?>
                 </div>
               <div class="clearfix"></div>
             </div><!-- dashboard graph -->
